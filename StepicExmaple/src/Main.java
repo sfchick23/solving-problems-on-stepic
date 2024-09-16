@@ -1,21 +1,43 @@
 import java.util.Scanner;
 
 public class Main {
+
+    // Метод для вычисления суммы цифр числа
+    public static int digitSum(int n) {
+        n = Math.abs(n);  // Игнорируем знак числа
+        int sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int number = scanner.nextInt();
-        int absNumber = Math.abs(number);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
 
-        int digitCount = 0;
-        int digitSum = 0;
+        // Перестановка границ, если необходимо
+        if (a > b) {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
 
-        do {
-            int digit = absNumber % 10;
-            digitSum += digit;
-            absNumber /= 10;
-            digitCount++;
-        } while (absNumber > 0);
+        // Поиск числа с максимальной суммой цифр
+        int maxSumNumber = a;
+        int maxSum = digitSum(a);
 
-        System.out.println(digitCount + " " + digitSum);
+        for (int i = a + 1; i <= b; i++) {
+            int currentSum = digitSum(i);
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+                maxSumNumber = i;
+            }
+        }
+
+        // Вывод результата
+        System.out.println(maxSumNumber);
     }
 }
