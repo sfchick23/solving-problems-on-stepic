@@ -18,7 +18,9 @@ public class Example38 {
         if (!email.endsWith("@gmail.com")) {
             return false;
         }
-
+        if (email.length() < 10) {
+            return false;
+        }
         // Проверяем, что '@' встречается только один раз
         int atIndex = email.indexOf('@');
         if (atIndex != email.lastIndexOf('@')) {
